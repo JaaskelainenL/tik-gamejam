@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://dcgulooakxcf8"]
+
+[ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
+[ext_resource type="Texture2D" uid="uid://dtv7g7gpd8mm3" path="res://assets/ruletti.jpg" id="2_xi2pb"]
+[ext_resource type="Script" path="res://scenes/ruletti.gd" id="3_o8uco"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
+
+[node name="Game" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00395554, 0)
+
+[node name="Pleijeri" parent="." instance=ExtResource("1_vryax")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486619, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.951819, 0.306659, 0, -0.306659, 0.951819, 0, 1.23482, 2.66095)
+
+[node name="rulettitausta" type="Sprite3D" parent="Camera3D"]
+transform = Transform3D(0.035, 0, 0, 0, 0.035, 0, 0, 0, 0.035, 0.195, -0.058, -0.207)
+texture = ExtResource("2_xi2pb")
+
+[node name="Label3D" type="Label3D" parent="Camera3D/rulettitausta"]
+transform = Transform3D(4.509, 0, 0, 0, 4.509, 2.5084e-07, 0, -2.5084e-07, 4.509, -12.643, -4.314, -3.457)
+text = "pyörii"
+
+[node name="Sprite3D" type="Sprite3D" parent="Camera3D/rulettitausta"]
+transform = Transform3D(0.25, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+modulate = Color(0, 0, 0, 1)
+texture = ExtResource("2_xi2pb")
+script = ExtResource("3_o8uco")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204, 0, 6.87773, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.834398, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_ldt8b")
