@@ -1,8 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://tar4o1gxdhg1"]
+[gd_scene load_steps=5 format=3 uid="uid://tar4o1gxdhg1"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_i81p0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8enam"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_psv1a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3tedn"]
+albedo_color = Color(1, 0, 0, 1)
 
 [node name="Pleijeri" type="CharacterBody3D"]
 script = ExtResource("1_i81p0")
@@ -11,3 +16,8 @@ script = ExtResource("1_i81p0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_8enam")
+
+[node name="suuntaNuoli" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.272918, 0, 0, 0, -2.6126e-08, -0.0158861, 0, 0.597694, -6.94406e-10, 0, 0.585684, 0)
+mesh = SubResource("PrismMesh_psv1a")
+surface_material_override/0 = SubResource("StandardMaterial3D_3tedn")
