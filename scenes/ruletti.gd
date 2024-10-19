@@ -1,11 +1,12 @@
 extends Sprite3D
 
 var spinning: bool = true # Variable to track whether the sprite is spinning
-var options: Array[String] = ["jump", "goon", "sesh", "shoot"] # Initialize with default options
+var options: Array[String] = ["jump"] # Initialize with default options
 var labels: Array[Label3D] = [] # Array to hold the label nodes for each option
 var num_options: int = 0 # Number of options currently available
 
 # Reference to the parent Sprite3D and the Label3D node
+@onready var player = get_tree().root.get_node("Game/Pleijeri")
 @onready var parent_node: Sprite3D = get_parent() as Sprite3D
 @onready var label_node: Label3D = get_parent().get_node("Label3D") # This can be a template label for creating new labels
 
@@ -28,6 +29,8 @@ func _input(event: InputEvent) -> void:
 			var wrapped_rotation = wrapf(rotation_degrees.z, 0, 360)
 			var selected_option = get_selected_option(wrapped_rotation)
 			print("Stopped on: " + selected_option)
+			player.roulette_action(selected_option)
+			parent_node.get_parent().queue_free()
 
 # Function to get the selected option based on the rotation angle
 func get_selected_option(rotation_degrees: float) -> String:
@@ -50,14 +53,21 @@ func remove_option(action_name: String) -> void:
 		options.erase(action_name)
 		update_options()
 
-# Update options and draw lines for each segment
 func update_options() -> void:
 	# Clear previous labels and lines
 	for label in labels:
 		label.queue_free()
 	labels.clear()
+	
 	num_options = options.size()
+	
 	if num_options == 0:
+		return
+	
+	# If there's only one option, don't draw any lines
+	if num_options == 1:
+		# Create a label for the single option without drawing any lines
+		create_label_for_option(0, 0.0)
 		return
 	
 	# Draw lines for each segment and add labels
@@ -100,11 +110,15 @@ func draw_line_on_parent(angle: float) -> void:
 	mesh_instance.material_override = material
 	
 	# Add the mesh instance to the parent node
-	parent_node.add_child.call_deferred(mesh_instance)
+	if parent_node:
+		parent_node.add_child.call_deferred(mesh_instance)
 
-# Create a Label3D for the given option
-# Create a Label3D for the given option
 func create_label_for_option(index: int, angle_degrees: float) -> void:
+	# Check if label_node is not null
+	if !label_node:
+		print("Label3D node is not available. Cannot duplicate.")
+		return
+	
 	var new_label = label_node.duplicate() as Label3D
 	new_label.text = options[index]
 	var angle = deg_to_rad(angle_degrees)
