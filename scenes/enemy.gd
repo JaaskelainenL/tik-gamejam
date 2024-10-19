@@ -8,6 +8,14 @@ const MAX_FALL_SPEED: float = -20.0
 const DECELERATION: float = 5.0
 var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
+var hp = 100
+
+func damage(amount):
+	hp -= amount
+	if hp <= 0:
+		queue_free()
+func heal(amount):
+	hp += amount
 
 # Called when the physics engine updates (every physics frame)
 func _physics_process(delta: float) -> void:
@@ -32,6 +40,9 @@ func _physics_process(delta: float) -> void:
 		
 		if collider.name == "killplane":
 			queue_free()
+		elif collider.name == "Bullet":
+			collider.queue_free()
+			damage(50)
 		elif collider.name != "floor":
 			print("hit")
 			if HIT_TIMER > HIT_COOLDOWN:
