@@ -1,14 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcgulooakxcf8"]
+[gd_scene load_steps=5 format=3 uid="uid://dcgulooakxcf8"]
 
+[ext_resource type="Script" path="res://scenes/game.gd" id="1_rfys8"]
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
-[ext_resource type="PackedScene" uid="uid://bgd1shp5bleyv" path="res://scenes/enemy.tscn" id="2_15064"]
-[ext_resource type="Script" path="res://scenes/enemy.gd" id="3_8awln"]
 [ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/pickup.tscn" id="4_6smg6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
+size = Vector3(1, 1, 1.00488)
 
 [node name="Game" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00395554, 0)
+script = ExtResource("1_rfys8")
 
 [node name="Pleijeri" parent="." instance=ExtResource("1_vryax")]
 unique_name_in_owner = true
@@ -24,18 +25,17 @@ transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204
 transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.834398, 0)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="floor"]
+transform = Transform3D(2.28611, 0, 0, 0, 1.00315, 0, 0, 0, 2.27065, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(2.28989, 0, 0, 0, 1, 0, 0, 0, 2.24135, 0, 0, 0.00560793)
 shape = SubResource("BoxShape3D_ldt8b")
-
-[node name="enemy" parent="." instance=ExtResource("2_15064")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -1.06428, 0)
-script = ExtResource("3_8awln")
 
 [node name="killplane" type="StaticBody3D" parent="."]
 transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, -3.79925, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="killplane"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.38108, 0, 0, 0)
 shape = SubResource("BoxShape3D_ldt8b")
 
 [node name="pickup" parent="." instance=ExtResource("4_6smg6")]
