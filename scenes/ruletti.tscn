@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cfssmgeuktjr2"]
+[gd_scene load_steps=4 format=3 uid="uid://cfssmgeuktjr2"]
 
 [ext_resource type="Texture2D" uid="uid://dtv7g7gpd8mm3" path="res://assets/ruletti.jpg" id="1_sjra2"]
+[ext_resource type="Texture2D" uid="uid://bo7mdon88frmo" path="res://assets/nuoli.png" id="2_7fila"]
 [ext_resource type="Script" path="res://scenes/ruletti.gd" id="2_w1uql"]
 
 [node name="Ruletti" type="Node3D"]
@@ -15,7 +16,7 @@ transform = Transform3D(4.509, 0, 0, 0, 4.509, 2.38419e-07, 0, -2.38419e-07, 4.5
 text = "pyörii"
 
 [node name="Sprite3D" type="Sprite3D" parent="rulettitausta"]
-transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.1)
+transform = Transform3D(0.505, 0, 0, 0, 0.77, 0, 0, 0, 1, 0, 0, 0.1)
 modulate = Color(0.355314, 0.355314, 0.355314, 1)
-texture = ExtResource("1_sjra2")
+texture = ExtResource("2_7fila")
 script = ExtResource("2_w1uql")

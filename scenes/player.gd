@@ -4,6 +4,8 @@ const JUMP_DISTANCE = 2.0
 const JUMP_HEIGHT = 4.5
 const SPIN = 3.0
 
+var hp = 100
+
 var doing_action = false
 var roulette_active = false
 var roulette_instance = null
@@ -12,6 +14,7 @@ var items: Array[String] = []
 var speed: float = 5.0  # You can adjust this value
 var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
+const PUSH_FORCE: float = 20
 
 func _process(delta: float) -> void:
 	if is_on_floor() and !doing_action and !roulette_active:
@@ -30,6 +33,9 @@ func _physics_process(delta: float) -> void:
 			if HIT_TIMER > HIT_COOLDOWN:
 				apply_knockback_to_enemy(collider)
 				HIT_TIMER = 0.0
+		elif collider.name == "Bullet":
+			damage(50)
+			collider.queue_free()
 	
 	# Player movement and jump logic
 	if Input.is_action_just_pressed("ui_accept"):
@@ -57,14 +63,6 @@ func _physics_process(delta: float) -> void:
 	elif is_on_floor() and !doing_action and velocity.y == 0:
 		# Horizontal movement logic (apply speed when on the floor)
 		var input_direction = Vector3.ZERO
-		if Input.is_action_pressed("ui_left"):
-			input_direction.x -= 1
-		if Input.is_action_pressed("ui_right"):
-			input_direction.x += 1
-		if Input.is_action_pressed("ui_up"):
-			input_direction.z -= 1
-		if Input.is_action_pressed("ui_down"):
-			input_direction.z += 1
 
 		if input_direction != Vector3.ZERO:
 			input_direction = input_direction.normalized()
@@ -81,7 +79,7 @@ func _physics_process(delta: float) -> void:
 func apply_knockback_to_enemy(enemy: Node3D) -> void:
 	if enemy is CharacterBody3D:
 		var knockback_direction = (enemy.global_transform.origin - global_transform.origin).normalized()
-		enemy.velocity += knockback_direction * 10.0  # Adjust knockback force for enemy
+		enemy.velocity += knockback_direction * PUSH_FORCE  # Adjust knockback force for enemy
 		print("Enemy knocked back by player!")
 
 func roulette_action(action):
@@ -91,6 +89,28 @@ func roulette_action(action):
 		velocity.y = JUMP_HEIGHT
 		velocity.x = direction.x * JUMP_DISTANCE
 		velocity.z = direction.z * JUMP_DISTANCE
+	elif action == "shoot":
+		shoot_bullet()
 
 	$suuntaNuoli.visible = true
 	doing_action = false
+
+func damage(amount):
+	hp -= amount
+func heal(amount):
+	hp += amount
+
+func shoot_bullet():
+	var bullet_scene = load("res://scenes/bullet.tscn") as PackedScene
+	if bullet_scene:
+		var bullet = bullet_scene.instantiate()
+		get_parent().add_child(bullet)  # Add the bullet to the same parent as the shooter
+
+		# Set the bullet's position to the player's position, slightly in front
+		bullet.position = position + transform.basis.z
+
+		# Set the bullet's rotation to match the player's rotation
+		bullet.rotation = rotation
+
+		# Pass the player's forward direction to the bullet
+		bullet.set_direction(transform.basis.z.normalized())

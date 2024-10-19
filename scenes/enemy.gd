@@ -9,7 +9,7 @@ const DECELERATION: float = 5.0
 var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
 const JUMP_DISTANCE = 5.0
-const JUMP_COOLDOWN: float = 2.0
+const JUMP_COOLDOWN: float = 3.0
 var JUMP_TIMER: float = 0.0
 
 var player: Node3D = null
@@ -17,6 +17,14 @@ var player: Node3D = null
 func _ready() -> void:
 	# Find the player node in the scene (adjust the path as necessary)
 	player = get_tree().root.get_node("Game/Pleijeri")
+var hp = 100
+
+func damage(amount):
+	hp -= amount
+	if hp <= 0:
+		queue_free()
+func heal(amount):
+	hp += amount
 
 # Called when the physics engine updates (every physics frame)
 func _physics_process(delta: float) -> void:
@@ -48,6 +56,9 @@ func _physics_process(delta: float) -> void:
 		print(str(collider.name))
 		if collider.name == "killplane":
 			queue_free()
+		elif collider.name == "Bullet":
+			collider.queue_free()
+			damage(50)
 		elif collider.name != "floor":
 			print("hit")
 			if HIT_TIMER > HIT_COOLDOWN:
