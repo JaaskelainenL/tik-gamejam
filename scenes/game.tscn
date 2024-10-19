@@ -10,8 +10,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00395554, 0)
 [node name="Pleijeri" parent="." instance=ExtResource("1_vryax")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486619, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.951819, 0.306659, 0, -0.306659, 0.951819, 0, 1.23482, 2.66095)
+[node name="Camera3D" type="Camera3D" parent="Pleijeri"]
+transform = Transform3D(-1, 2.687e-08, -8.3191e-08, 0, 0.951594, 0.307357, 8.74228e-08, 0.307357, -0.951594, 0, 0.847789, -2.27704)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204, 0, 6.87773, 0)

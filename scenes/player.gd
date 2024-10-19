@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 					# This is how you add extra options to the roulette
 					#roulette_instance.get_node("rulettitausta/Sprite3D").add_option("test")
 
-					var camera_node = get_tree().root.get_node("Game/Camera3D")
+					var camera_node = get_tree().root.get_node("Game/Pleijeri/Camera3D")
 					if camera_node:
 						camera_node.add_child(roulette_instance)
 						roulette_instance.name = "Roulette"
