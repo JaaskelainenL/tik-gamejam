@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://chy0b1ta510ig"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_bhari"]
+height = 1.5
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_wv5or"]
+height = 1.5
+
+[node name="CharacterBody3D" type="CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -0.62529, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.59811, 0)
+mesh = SubResource("CapsuleMesh_bhari")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.60079, 0)
+shape = SubResource("CapsuleShape3D_wv5or")
