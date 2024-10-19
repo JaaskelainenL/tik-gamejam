@@ -30,7 +30,9 @@ func _physics_process(delta: float) -> void:
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		if collider.name != "floor":
+		if collider.name == "killplane":
+			queue_free()
+		elif collider.name != "floor":
 			print("hit")
 			if HIT_TIMER > HIT_COOLDOWN:
 				# Apply push force based on collision normal

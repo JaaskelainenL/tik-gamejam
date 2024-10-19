@@ -16,6 +16,13 @@ func _process(delta: float) -> void:
 		rotate_y(SPIN * delta)
 
 func _physics_process(delta: float) -> void:
+	# Check if colliding with kill plane
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		if collider.name == "killplane":
+			global_position = Vector3(0.0, 0.4, 0.0)
+	
 	# Player movement and jump logic
 	if Input.is_action_just_pressed("ui_accept"):
 		if !doing_action and !roulette_active and is_on_floor():

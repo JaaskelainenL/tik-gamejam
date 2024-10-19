@@ -29,3 +29,9 @@ shape = SubResource("BoxShape3D_ldt8b")
 [node name="enemy" parent="." instance=ExtResource("2_15064")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -1.06428, 0)
 script = ExtResource("3_8awln")
+
+[node name="killplane" type="StaticBody3D" parent="."]
+transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, -3.79925, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="killplane"]
+shape = SubResource("BoxShape3D_ldt8b")
