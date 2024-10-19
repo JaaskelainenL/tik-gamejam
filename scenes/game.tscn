@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcgulooakxcf8"]
+[gd_scene load_steps=6 format=3 uid="uid://dcgulooakxcf8"]
 
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
 [ext_resource type="PackedScene" uid="uid://bgd1shp5bleyv" path="res://scenes/enemy.tscn" id="2_15064"]
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="3_8awln"]
+[ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/pickup.tscn" id="4_6smg6"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
 
@@ -10,6 +11,7 @@
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00395554, 0)
 
 [node name="Pleijeri" parent="." instance=ExtResource("1_vryax")]
+unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486619, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Pleijeri"]
@@ -35,3 +37,12 @@ transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, -3.79925, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="killplane"]
 shape = SubResource("BoxShape3D_ldt8b")
+
+[node name="pickup" parent="." instance=ExtResource("4_6smg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676651, 3.15382)
+
+[node name="pickup2" parent="." instance=ExtResource("4_6smg6")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, 0.59856, 3.15382)
+
+[node name="pickup3" parent="." instance=ExtResource("4_6smg6")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, 0.676651, -0.724948)

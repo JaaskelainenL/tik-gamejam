@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://lsgeeqv4m2fq"]
+
+[ext_resource type="Script" path="res://scenes/pickup.gd" id="1_g3o6r"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c0l3k"]
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4jdie"]
+height = 0.1
+
+[node name="pickup" type="Area3D"]
+script = ExtResource("1_g3o6r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_c0l3k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("CylinderMesh_4jdie")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

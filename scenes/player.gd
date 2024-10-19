@@ -7,7 +7,7 @@ const SPIN = 3.0
 var doing_action = false
 var roulette_active = false
 var roulette_instance = null
-
+var items: Array[String] = []
 # Movement speed on the ground
 var speed: float = 5.0  # You can adjust this value
 
