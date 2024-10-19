@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqo8xaddro4g4"]
+
+[ext_resource type="Script" path="res://scenes/bullet.gd" id="1_imp0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bp8ny"]
+
+[node name="Bullet" type="RigidBody3D"]
+gravity_scale = 0.0
+script = ExtResource("1_imp0k")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+size = Vector3(0.1, 0.1, 0.25)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.25, 0, 0, 0)
+shape = SubResource("BoxShape3D_bp8ny")
