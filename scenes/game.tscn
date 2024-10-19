@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dcgulooakxcf8"]
 
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
-[ext_resource type="PackedScene" uid="uid://chy0b1ta510ig" path="res://scenes/enemy.tscn" id="2_15064"]
+[ext_resource type="PackedScene" uid="uid://bgd1shp5bleyv" path="res://scenes/enemy.tscn" id="2_15064"]
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="3_8awln"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
