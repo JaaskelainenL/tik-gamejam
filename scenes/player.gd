@@ -34,6 +34,8 @@ func _physics_process(delta: float) -> void:
 					var camera_node = get_tree().root.get_node("Game/Pleijeri/Camera3D")
 					if camera_node:
 						camera_node.add_child(roulette_instance)
+						for i in items:
+							roulette_instance.get_node("rulettitausta/Sprite3D").add_option(i)
 						roulette_instance.name = "Roulette"
 			
 			roulette_active = true
