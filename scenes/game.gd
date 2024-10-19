@@ -1,6 +1,6 @@
 extends Node3D
 
-const ENEMY_COUNT = 5
+const ENEMY_COUNT = 1
 var enemy = preload("res://scenes/enemy.tscn") as PackedScene
 
 # Called when the node enters the scene tree for the first time.
@@ -14,6 +14,7 @@ func _ready() -> void:
 		
 		# Set a random position or custom placement for each instance
 		instance.global_position = Vector3(randf() * 10.0, 0.0, randf() * 10.0)
+		instance.JUMP_TIMER = randf() * 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

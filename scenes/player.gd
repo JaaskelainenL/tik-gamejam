@@ -14,7 +14,7 @@ var items: Array[String] = []
 var speed: float = 5.0  # You can adjust this value
 var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
-const PUSH_FORCE: float = 20
+const PUSH_FORCE: float = 30
 
 func _process(delta: float) -> void:
 	if is_on_floor() and !doing_action and !roulette_active:
@@ -29,8 +29,9 @@ func _physics_process(delta: float) -> void:
 		if collider.name == "killplane":
 			print("you died")
 			global_position = Vector3(0.0, 0.4, 0.0)
-		elif collider.name == "enemy":  # Assuming enemy's name is "enemy"
+		elif collider.name == "CharacterBody3D":  # Assuming enemy's name is "enemy"
 			if HIT_TIMER > HIT_COOLDOWN:
+				print("hit enemy")
 				apply_knockback_to_enemy(collider)
 				HIT_TIMER = 0.0
 		elif collider.name == "Bullet":

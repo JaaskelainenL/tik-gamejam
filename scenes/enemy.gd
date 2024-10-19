@@ -63,7 +63,7 @@ func _physics_process(delta: float) -> void:
 			print("hit")
 			if HIT_TIMER > HIT_COOLDOWN:
 				# Apply push force based on collision normal
-				apply_knockback_to_player(collider)
+				apply_knockback(collider)
 				HIT_TIMER = 0.0
 
 func jump_towards_player() -> void:
@@ -78,7 +78,7 @@ func jump_towards_player() -> void:
 		print("Jumping towards player!")
 
 # Function to apply knockback to the player
-func apply_knockback_to_player(player: Node3D) -> void:
+func apply_knockback(player: Node3D) -> void:
 	if player is CharacterBody3D:
 		var knockback_direction = (player.global_transform.origin - global_transform.origin).normalized()
 		player.velocity += knockback_direction * PUSH_FORCE  # Apply knockback force
