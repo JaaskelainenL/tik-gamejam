@@ -11,6 +11,7 @@ const HIT_COOLDOWN: float = 0.5
 const JUMP_DISTANCE = 5.0
 const JUMP_COOLDOWN: float = 3.0
 var JUMP_TIMER: float = 0.0
+var jumping = false
 
 var player: Node3D = null
 
@@ -33,8 +34,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y += GRAVITY * delta
 		velocity.y = max(velocity.y, MAX_FALL_SPEED)  # Limit fall speed
 	else:
-		position.y += 0.001
-		velocity.y = 0  # Reset Y velocity when on the floor
+		if !jumping:
+			velocity.y = 0
+		jumping = false
+		#position.y += 0.001
 		
 	if velocity.length() > 0:
 		velocity = velocity.normalized() * max(velocity.length() - DECELERATION * delta, 0)
@@ -53,7 +56,6 @@ func _physics_process(delta: float) -> void:
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
-		print(str(collider.name))
 		if collider.name == "killplane":
 			queue_free()
 		elif collider.name == "Bullet":
@@ -74,6 +76,8 @@ func jump_towards_player() -> void:
 			# Set the horizontal velocity towards the player
 		velocity.x = direction_to_player.x * JUMP_DISTANCE
 		velocity.z = direction_to_player.z * JUMP_DISTANCE
+		velocity.y = JUMP_DISTANCE
+		jumping = true
 
 		print("Jumping towards player!")
 
