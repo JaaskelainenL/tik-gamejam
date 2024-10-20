@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+var pool = preload("res://scenes/pool.tscn") as PackedScene
 const JUMP_DISTANCE = 2.0
 const JUMP_HEIGHT = 4.5
 const SPIN = 3.0
@@ -14,7 +15,8 @@ var items: Array[String] = []
 var speed: float = 5.0  # You can adjust this value
 var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
-const PUSH_FORCE: float = 30
+var PUSH_FORCE: float = 20
+var KB_USES = 0
 
 func _process(delta: float) -> void:
 	if is_on_floor() and !doing_action and !roulette_active:
@@ -74,6 +76,10 @@ func apply_knockback_to_enemy(enemy: Node3D) -> void:
 	if enemy is CharacterBody3D:
 		var knockback_direction = (enemy.global_transform.origin - global_transform.origin).normalized()
 		enemy.velocity += knockback_direction * PUSH_FORCE  # Adjust knockback force for enemy
+		if KB_USES == 0:
+			PUSH_FORCE = 20
+		else:
+			KB_USES -= 1
 		print("Enemy knocked back by player!")
 
 func roulette_action(action):
@@ -85,6 +91,33 @@ func roulette_action(action):
 		velocity.z = direction.z * JUMP_DISTANCE
 	elif action == "shoot":
 		shoot_bullet()
+		items.erase("shoot")
+	elif action == "knockback":
+		PUSH_FORCE = 40
+		KB_USES = 5
+		items.erase("knockback")
+	elif action == "acid":
+	# Save the player's current position before jumping
+		var old_pos = global_position
+	
+	# Calculate jump direction and apply jump velocity
+		var angleRadian = rotation_degrees.y * (PI / 180.0)
+		var direction := Vector3(0.0, 0.0, 1.0).rotated(Vector3(0.0, 1.0, 0.0), angleRadian)
+		velocity.y = JUMP_HEIGHT
+		velocity.x = direction.x * JUMP_DISTANCE
+		velocity.z = direction.z * JUMP_DISTANCE
+	
+	# Create an instance of the acid pool
+		var instance = pool.instantiate() as Area3D
+	
+	# Add the acid pool to the player's parent, not the player itself
+		get_parent().add_child(instance)
+	
+	# Set the acid pool's position to the old position (where the player jumped from)
+		instance.global_position = old_pos
+		
+		items.erase("acid")
+
 
 	$suuntaNuoli.visible = true
 	doing_action = false

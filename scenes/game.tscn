@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcgulooakxcf8"]
+[gd_scene load_steps=7 format=3 uid="uid://dcgulooakxcf8"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_rfys8"]
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
-[ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/pickup.tscn" id="4_6smg6"]
+[ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/shoot.tscn" id="4_6smg6"]
+[ext_resource type="PackedScene" uid="uid://dlbsxpvadviqe" path="res://scenes/knockback.tscn" id="4_xinev"]
+[ext_resource type="PackedScene" uid="uid://b372gws01d6dy" path="res://scenes/acid.tscn" id="5_p314c"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
 size = Vector3(1, 1, 1.00488)
@@ -38,11 +40,11 @@ transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, -3.79925, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.38108, 0, 0, 0)
 shape = SubResource("BoxShape3D_ldt8b")
 
-[node name="pickup" parent="." instance=ExtResource("4_6smg6")]
+[node name="shoot" parent="." instance=ExtResource("4_6smg6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676651, 3.15382)
 
-[node name="pickup2" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, 0.59856, 3.15382)
+[node name="knockback" parent="." instance=ExtResource("4_xinev")]
+transform = Transform3D(0.58705, 0, 0.80955, 0, 1, 0, -0.80955, 0, 0.58705, 8.96483, 0.59856, 8.52598)
 
-[node name="pickup3" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, 0.676651, -0.724948)
+[node name="acid" parent="." instance=ExtResource("5_p314c")]
+transform = Transform3D(-0.799056, 0, 0.601257, 0, 1, 0, -0.601257, 0, -0.799056, -7.34069, 0.676651, 3.99492)

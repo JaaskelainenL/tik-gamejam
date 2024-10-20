@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://dlbsxpvadviqe"]
+
+[ext_resource type="Script" path="res://scenes/knockback.gd" id="1_4btij"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c0l3k"]
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4jdie"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_imsde"]
+albedo_color = Color(0, 0, 1, 1)
+
+[node name="knockback" type="Area3D"]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, 0.59856, 3.15382)
+script = ExtResource("1_4btij")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.866026, -0.5, 2.18557e-08, 0, -4.37114e-08, -1, 0.5, 0.866026, -3.78552e-08, -1.59422, 0, -4.54519)
+shape = SubResource("CylinderShape3D_c0l3k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.866026, -0.5, 2.18557e-08, 0, -4.37114e-08, -1, 0.5, 0.866026, -3.78552e-08, -1.59422, 0, -4.54519)
+mesh = SubResource("CylinderMesh_4jdie")
+surface_material_override/0 = SubResource("StandardMaterial3D_imsde")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

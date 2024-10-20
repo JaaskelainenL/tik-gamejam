@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://lsgeeqv4m2fq"]
+[gd_scene load_steps=5 format=3 uid="uid://lsgeeqv4m2fq"]
 
-[ext_resource type="Script" path="res://scenes/pickup.gd" id="1_g3o6r"]
+[ext_resource type="Script" path="res://scenes/shoot.gd" id="1_05rru"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c0l3k"]
 height = 0.1
@@ -8,8 +8,11 @@ height = 0.1
 [sub_resource type="CylinderMesh" id="CylinderMesh_4jdie"]
 height = 0.1
 
-[node name="pickup" type="Area3D"]
-script = ExtResource("1_g3o6r")
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_102dg"]
+albedo_color = Color(1, 0, 0, 1)
+
+[node name="shoot" type="Area3D"]
+script = ExtResource("1_05rru")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
@@ -18,5 +21,6 @@ shape = SubResource("CylinderShape3D_c0l3k")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4jdie")
+surface_material_override/0 = SubResource("StandardMaterial3D_102dg")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

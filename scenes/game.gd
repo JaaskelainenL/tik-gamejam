@@ -1,5 +1,5 @@
 extends Node3D
-
+var rng = RandomNumberGenerator.new()
 const ENEMY_COUNT = 1
 var enemy = preload("res://scenes/enemy.tscn") as PackedScene
 
@@ -13,7 +13,7 @@ func _ready() -> void:
 		add_child(instance)
 		
 		# Set a random position or custom placement for each instance
-		instance.global_position = Vector3(randf() * 10.0, 0.0, randf() * 10.0)
+		instance.global_position = Vector3(rng.randf_range(-1.0,1.0) * 10.0, 0.0, rng.randf_range(-1.0,1.0) * 10.0)
 		instance.JUMP_TIMER = randf() * 3
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

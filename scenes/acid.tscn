@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://b372gws01d6dy"]
+
+[ext_resource type="Script" path="res://scenes/acid.gd" id="1_4oax6"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_c0l3k"]
+height = 0.1
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4jdie"]
+height = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hob30"]
+albedo_color = Color(0, 1, 0, 1)
+
+[node name="acid" type="Area3D"]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, 0.676651, -0.724948)
+script = ExtResource("1_4oax6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.965926, 0.258819, -1.13133e-08, 0, -4.37114e-08, -1, -0.258819, 0.965926, -4.2222e-08, 0.0214541, 0, 2.88967)
+shape = SubResource("CylinderShape3D_c0l3k")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.965926, 0.258819, -1.13133e-08, 0, -4.37114e-08, -1, -0.258819, 0.965926, -4.2222e-08, 0.0214541, 0, 2.88967)
+mesh = SubResource("CylinderMesh_4jdie")
+surface_material_override/0 = SubResource("StandardMaterial3D_hob30")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
