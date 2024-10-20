@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/shoot.tscn" id="4_6smg6"]
 [ext_resource type="PackedScene" uid="uid://dlbsxpvadviqe" path="res://scenes/knockback.tscn" id="4_xinev"]
 [ext_resource type="PackedScene" uid="uid://txrrl3ulsq0q" path="res://scenes/hp.tscn" id="5_756q6"]
-[ext_resource type="PackedScene" path="res://scenes/mappi.tscn" id="5_e048o"]
+[ext_resource type="PackedScene" uid="uid://6w4uqo2jvkw2" path="res://scenes/mappi.tscn" id="5_e048o"]
 [ext_resource type="PackedScene" uid="uid://b372gws01d6dy" path="res://scenes/acid.tscn" id="5_p314c"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="6_7n34u"]
 
@@ -93,13 +93,25 @@ shape = 2
 material = SubResource("FogMaterial_sd2h3")
 
 [node name="shoot" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.751321, -2.77288, -5.16929)
+transform = Transform3D(0.771591, 0, 0.636119, 0, 1, 0, -0.636119, 0, 0.771591, -10.0579, -2.77288, -25.9725)
+
+[node name="shoot2" parent="." instance=ExtResource("4_6smg6")]
+transform = Transform3D(0.600406, 0, 0.799695, 0, 1, 0, -0.799695, 0, 0.600406, -64.9225, -4.51532, -12.4849)
 
 [node name="hp" parent="." instance=ExtResource("5_756q6")]
-transform = Transform3D(0.251073, 0, -0.967968, 0, 1, 0, 0.967968, 0, 0.251073, 5.65243, -2.92485, 0)
+transform = Transform3D(0.0207682, 0, -0.999784, 0, 1, 0, 0.999784, 0, 0.0207682, -45.2248, -1.67108, 27.0744)
+
+[node name="hp2" parent="." instance=ExtResource("5_756q6")]
+transform = Transform3D(0.251073, 0, -0.967968, 0, 1, 0, 0.967968, 0, 0.251073, -41.3576, -2.54956, -37.0375)
 
 [node name="knockback" parent="." instance=ExtResource("4_xinev")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.55385, -2.71534, 9.96276)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.55385, -2.71534, 31.5586)
+
+[node name="knockback2" parent="." instance=ExtResource("4_xinev")]
+transform = Transform3D(-0.772589, 0, 0.634905, 0, 1, 0, -0.634905, 0, -0.772589, -69.9246, -4.74877, 9.43081)
 
 [node name="acid" parent="." instance=ExtResource("5_p314c")]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -10.7268, -2.61203, 1.19147)
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -40.3016, 0.419537, 38.9217)
+
+[node name="acid2" parent="." instance=ExtResource("5_p314c")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -24.2389, -2.41119, -16.5998)
