@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://dcgulooakxcf8"]
+[gd_scene load_steps=14 format=3 uid="uid://dcgulooakxcf8"]
 
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
+[ext_resource type="AudioStream" uid="uid://bhdc44rk40chj" path="res://assets/bg.ogg" id="2_8ukdx"]
 [ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/shoot.tscn" id="4_6smg6"]
 [ext_resource type="PackedScene" uid="uid://dlbsxpvadviqe" path="res://scenes/knockback.tscn" id="4_xinev"]
 [ext_resource type="PackedScene" uid="uid://txrrl3ulsq0q" path="res://scenes/hp.tscn" id="5_756q6"]
@@ -71,6 +72,9 @@ transform = Transform3D(0.205, -3.64153e-16, 1.08526e-23, 3.64153e-16, 0.205, -6
 modulate = Color(1, 0.246188, 0.378151, 1)
 outline_modulate = Color(0.294532, 0.0762849, 0.0621258, 1)
 text = "♡ 100"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Pleijeri"]
+stream = ExtResource("2_8ukdx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204, 0, 6.87773, 0)

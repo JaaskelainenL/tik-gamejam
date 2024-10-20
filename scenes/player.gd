@@ -21,6 +21,9 @@ var PUSH_FORCE: float = 20
 var KB_USES = 0
 @export var BULLETS = 0
 
+func _ready() -> void:
+	get_node("AudioStreamPlayer").play()
+
 func _process(delta: float) -> void:
 	if is_on_floor() and !doing_action and !roulette_active:
 		rotate_y(SPIN * delta)
