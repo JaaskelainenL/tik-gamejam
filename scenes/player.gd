@@ -61,17 +61,10 @@ func _physics_process(delta: float) -> void:
 	# Gravity handling
 	if !is_on_floor():
 		velocity += get_gravity() * delta
-	elif is_on_floor() and !doing_action and velocity.y == 0:
-		# Horizontal movement logic (apply speed when on the floor)
-		var input_direction = Vector3.ZERO
-
-		if input_direction != Vector3.ZERO:
-			input_direction = input_direction.normalized()
-			velocity.x = input_direction.x * speed
-			velocity.z = input_direction.z * speed
-		else:
-			velocity.x = 0.0
-			velocity.z = 0.0
+	elif is_on_floor() and velocity.y == 0:
+		velocity.x = 0.0
+		velocity.z = 0.0
+		
 
 	# Apply movement
 	move_and_slide()
