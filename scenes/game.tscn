@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
 [ext_resource type="PackedScene" uid="uid://bgd1shp5bleyv" path="res://scenes/enemy.tscn" id="2_15064"]
-[ext_resource type="Script" path="res://scenes/enemy.gd" id="3_8awln"]
-[ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/pickup.tscn" id="4_6smg6"]
+[ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/shoot.tscn" id="4_6smg6"]
 [ext_resource type="PackedScene" uid="uid://6w4uqo2jvkw2" path="res://scenes/mappi.tscn" id="5_e048o"]
+[ext_resource type="Script" path="res://scenes/game.gd" id="6_7n34u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tulc0"]
 sky_top_color = Color(0.270431, 0.379766, 0.91661, 1)
@@ -51,25 +51,26 @@ environment = SubResource("Environment_bjx4v")
 
 [node name="Pleijeri" parent="." instance=ExtResource("1_vryax")]
 unique_name_in_owner = true
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.486619, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.865204, -2.67741, 0)
 
 [node name="Camera3D" type="Camera3D" parent="Pleijeri"]
 transform = Transform3D(-1, 2.687e-08, -8.3191e-08, 0, 0.951594, 0.307357, 8.74228e-08, 0.307357, -0.951594, 0, 0.847789, -2.27704)
 
+[node name="score_label" type="Label3D" parent="Pleijeri/Camera3D"]
+transform = Transform3D(0.222, -1.17297e-15, 1.39828e-22, 1.17297e-15, 0.222, -1.47593e-08, -6.18456e-23, 1.47593e-08, 0.222, 0.351, 0.269, -0.383)
+text = "Score: 0"
+
+[node name="hp_label" type="Label3D" parent="Pleijeri/Camera3D"]
+transform = Transform3D(0.205, -3.64153e-16, 1.08526e-23, 3.64153e-16, 0.205, -6.10948e-09, 0, 6.10948e-09, 0.205, -0.36, 0.223, -0.318)
+modulate = Color(1, 0.246188, 0.378151, 1)
+outline_modulate = Color(0.294532, 0.0762849, 0.0621258, 1)
+text = "♡ 100"
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204, 0, 6.87773, 0)
 
-[node name="floor" type="StaticBody3D" parent="."]
-transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 10, 0, -0.834398, 0)
-
-[node name="CSGBox3D" type="CSGBox3D" parent="floor"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
-shape = SubResource("BoxShape3D_ldt8b")
-
 [node name="enemy" parent="." instance=ExtResource("2_15064")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -1.06428, 0)
-script = ExtResource("3_8awln")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -2.24746, 0)
 
 [node name="killplane" type="StaticBody3D" parent="."]
 transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, 18.8432, 0)
@@ -79,16 +80,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.2037, 0)
 shape = SubResource("BoxShape3D_ldt8b")
 
 [node name="pickup" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.676651, 3.15382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.73296, 3.15382)
 
 [node name="pickup2" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, 0.59856, 3.15382)
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, -2.38879, 3.15382)
 
 [node name="pickup3" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, 0.676651, -0.724948)
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, -2.28144, -0.724948)
 
 [node name="mappi" parent="." instance=ExtResource("5_e048o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8012, -3.74271, 6.03883)
+script = ExtResource("6_7n34u")
 
 [node name="FogVolume" type="FogVolume" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0263, -5.08911, 8.52271)

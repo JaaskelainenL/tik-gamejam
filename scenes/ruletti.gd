@@ -38,7 +38,7 @@ func get_selected_option(rotation_degrees: float) -> String:
 		return "No options available"
 
 	var angle_step = 360.0 / num_options
-	var selected_index = int((rotation_degrees + angle_step) / angle_step) % num_options
+	var selected_index = int((rotation_degrees - 90 + (angle_step/2)) / angle_step) % num_options
 	return options[selected_index]
 
 # Function to add a new option
@@ -73,9 +73,9 @@ func update_options() -> void:
 	# Draw lines for each segment and add labels
 	var angle_step = 360.0 / num_options
 	for i in range(num_options):
-		var angle = deg_to_rad(i * angle_step)
+		var angle = deg_to_rad(i * angle_step+90)
 		draw_line_on_parent(angle)
-		create_label_for_option(i, (i + 0.5) * angle_step) # Place label at the midpoint of the segment
+		create_label_for_option(i, (i + 0.5) * angle_step + 90) # Place label at the midpoint of the segment
 
 # Draw a line on the parent node for the given angle
 func draw_line_on_parent(angle: float) -> void:
