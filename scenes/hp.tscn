@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://lsgeeqv4m2fq"]
+[gd_scene load_steps=5 format=3 uid="uid://txrrl3ulsq0q"]
 
-[ext_resource type="Script" path="res://scenes/shoot.gd" id="1_05rru"]
+[ext_resource type="Script" path="res://scenes/hp.gd" id="1_02j2b"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c0l3k"]
 height = 0.1
@@ -9,10 +9,11 @@ height = 0.1
 height = 0.1
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_102dg"]
-albedo_color = Color(1, 0.529412, 0, 1)
+albedo_color = Color(1, 0, 0, 1)
 
-[node name="shoot" type="Area3D"]
-script = ExtResource("1_05rru")
+[node name="hp" type="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40823, 0)
+script = ExtResource("1_02j2b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
