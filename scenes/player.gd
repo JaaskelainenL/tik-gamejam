@@ -149,6 +149,8 @@ func roulette_action(action):
 func damage(amount):
 	hp -= amount
 	hpText.text = "♡ "+str(hp)
+	if hp <= 0:
+		get_tree().change_scene_to_file(get_tree().current_scene.scene_file_path)
 func heal(amount):
 	hp += amount
 	hpText.text = "♡ "+str(hp)
