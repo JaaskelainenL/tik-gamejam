@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://dcgulooakxcf8"]
+[gd_scene load_steps=12 format=3 uid="uid://dcgulooakxcf8"]
 
 [ext_resource type="PackedScene" uid="uid://tar4o1gxdhg1" path="res://scenes/player.tscn" id="1_vryax"]
-[ext_resource type="PackedScene" uid="uid://bgd1shp5bleyv" path="res://scenes/enemy.tscn" id="2_15064"]
 [ext_resource type="PackedScene" uid="uid://lsgeeqv4m2fq" path="res://scenes/shoot.tscn" id="4_6smg6"]
-[ext_resource type="PackedScene" uid="uid://6w4uqo2jvkw2" path="res://scenes/mappi.tscn" id="5_e048o"]
+[ext_resource type="PackedScene" uid="uid://dlbsxpvadviqe" path="res://scenes/knockback.tscn" id="4_xinev"]
+[ext_resource type="PackedScene" path="res://scenes/mappi.tscn" id="5_e048o"]
+[ext_resource type="PackedScene" uid="uid://b372gws01d6dy" path="res://scenes/acid.tscn" id="5_p314c"]
 [ext_resource type="Script" path="res://scenes/game.gd" id="6_7n34u"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_tulc0"]
@@ -35,6 +36,7 @@ volumetric_fog_ambient_inject = 0.66
 volumetric_fog_sky_affect = 0.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ldt8b"]
+size = Vector3(2.7113, 1, 3.53317)
 
 [sub_resource type="FogMaterial" id="FogMaterial_sd2h3"]
 density = -1.4002
@@ -60,6 +62,9 @@ transform = Transform3D(-1, 2.687e-08, -8.3191e-08, 0, 0.951594, 0.307357, 8.742
 transform = Transform3D(0.222, -1.17297e-15, 1.39828e-22, 1.17297e-15, 0.222, -1.47593e-08, -6.18456e-23, 1.47593e-08, 0.222, 0.351, 0.269, -0.383)
 text = "Score: 0"
 
+[node name="abilities_label" type="Label3D" parent="Pleijeri/Camera3D"]
+transform = Transform3D(0.222, 4.44089e-16, -7.10543e-15, 3.10862e-15, 0.222, -1.49012e-08, -5.32907e-15, 1.49012e-08, 0.222, 0.351, 0.220467, -0.398675)
+
 [node name="hp_label" type="Label3D" parent="Pleijeri/Camera3D"]
 transform = Transform3D(0.205, -3.64153e-16, 1.08526e-23, 3.64153e-16, 0.205, -6.10948e-09, 0, 6.10948e-09, 0.205, -0.36, 0.223, -0.318)
 modulate = Color(1, 0.246188, 0.378151, 1)
@@ -69,24 +74,12 @@ text = "♡ 100"
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.0119204, 0.999929, 0, -0.999929, 0.0119204, 0, 6.87773, 0)
 
-[node name="enemy" parent="." instance=ExtResource("2_15064")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -2.24746, 0)
-
 [node name="killplane" type="StaticBody3D" parent="."]
 transform = Transform3D(57.4844, 0, 0, 0, 1, 0, 0, 0, 40.7933, 0, 18.8432, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="killplane"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -28.2037, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.667908, -28.2037, 0.144455)
 shape = SubResource("BoxShape3D_ldt8b")
-
-[node name="pickup" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.73296, 3.15382)
-
-[node name="pickup2" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 3.65226, -2.38879, 3.15382)
-
-[node name="pickup3" parent="." instance=ExtResource("4_6smg6")]
-transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -2.80372, -2.28144, -0.724948)
 
 [node name="mappi" parent="." instance=ExtResource("5_e048o")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -37.8012, -3.74271, 6.03883)
@@ -97,3 +90,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -35.0263, -5.08911, 8.52271)
 size = Vector3(91.9284, 4.03712, 99.6899)
 shape = 2
 material = SubResource("FogMaterial_sd2h3")
+
+[node name="shoot" parent="." instance=ExtResource("4_6smg6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.40823, 0)
+
+[node name="knockback" parent="." instance=ExtResource("4_xinev")]
+transform = Transform3D(0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, 0.866025, 1.55385, -2.71534, 9.96276)
+
+[node name="acid" parent="." instance=ExtResource("5_p314c")]
+transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -10.7268, -2.61203, 1.19147)

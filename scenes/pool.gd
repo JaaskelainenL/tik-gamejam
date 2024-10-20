@@ -1,10 +1,11 @@
-extends Area3D
+extends RigidBody3D
 
-# Called when a body enters the Area3D
-func _on_body_entered(body: Node3D) -> void:
-	print("hit")
+var age = 0.0
+const MAX_AGE = 20.0
 
-	# Check if the body has a velocity property
-	if body.has_method("move_and_slide"):
-		body.velocity.y = 20  # Apply bounce by modifying Y velocity
-		body.hp -= 20
+# Called every physics frame to update the bullet's movement
+func _physics_process(delta: float) -> void:
+	age += delta
+
+	if age > MAX_AGE:
+		queue_free()

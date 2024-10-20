@@ -64,6 +64,12 @@ func _physics_process(delta: float) -> void:
 		elif collider.name.contains("Bullet"):
 			collider.queue_free()
 			damage(50)
+		elif collider.name.contains("pool"):
+			if HIT_TIMER > HIT_COOLDOWN:
+				print("hit acid")
+				velocity.y += 20
+				damage(25)
+				HIT_TIMER = 0.0
 		elif collider.name != "mappi":
 			if HIT_TIMER > HIT_COOLDOWN:
 				# Apply push force based on collision normal

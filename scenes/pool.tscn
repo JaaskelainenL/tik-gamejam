@@ -13,7 +13,7 @@ roughness_texture_channel = 1
 emission_enabled = true
 emission = Color(0.580392, 0.4, 0, 1)
 
-[node name="pool" type="Area3D"]
+[node name="pool" type="RigidBody3D"]
 script = ExtResource("1_bf4wl")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

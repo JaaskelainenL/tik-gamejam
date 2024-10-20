@@ -7,6 +7,7 @@ const SPIN = 3.0
 
 var hp = 100.0
 @onready var hpText = get_node("Camera3D/hp_label")
+@onready var abText = get_node("Camera3D/abilities_label")
 
 var doing_action = false
 var roulette_active = false
@@ -40,6 +41,12 @@ func _physics_process(delta: float) -> void:
 		elif collider.name.contains("Bullet"):
 			damage(50)
 			collider.queue_free()
+		elif collider.name.contains("pool"):
+			if HIT_TIMER > HIT_COOLDOWN:
+				print("hit acid")
+				velocity.y += 10
+				damage(25)
+				HIT_TIMER = 0.0
 	
 	# Player movement and jump logic
 	if Input.is_action_just_pressed("ui_accept"):
@@ -78,11 +85,13 @@ func apply_knockback_to_enemy(enemy: Node3D) -> void:
 	if enemy is CharacterBody3D:
 		var knockback_direction = (enemy.global_transform.origin - global_transform.origin).normalized()
 		enemy.velocity += knockback_direction * PUSH_FORCE  # Adjust knockback force for enemy
-		if KB_USES == 0:
-			PUSH_FORCE = 20
-		else:
+		if KB_USES > 0:
 			KB_USES -= 1
-		print("Enemy knocked back by player!")
+			abText.text = "KB left: " + str(KB_USES)
+			if KB_USES == 0:
+				abText.text = ""
+				PUSH_FORCE = 20
+			print("Enemy knocked back by player!")
 
 func roulette_action(action):
 	if action == "jump":
@@ -97,6 +106,7 @@ func roulette_action(action):
 	elif action == "knockback":
 		PUSH_FORCE = 40
 		KB_USES = 5
+		abText.text = "KB left: " + str(KB_USES)
 		items.erase("knockback")
 	elif action == "acid":
 	# Save the player's current position before jumping
@@ -110,12 +120,12 @@ func roulette_action(action):
 		velocity.z = direction.z * JUMP_DISTANCE
 	
 	# Create an instance of the acid pool
-		var instance = pool.instantiate() as Area3D
+		var instance = pool.instantiate()
 	
 	# Add the acid pool to the player's parent, not the player itself
 		get_parent().add_child(instance)
-	
 	# Set the acid pool's position to the old position (where the player jumped from)
+		HIT_TIMER = 0.0
 		instance.global_position = old_pos
 		
 		items.erase("acid")
