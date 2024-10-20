@@ -1,6 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgd1shp5bleyv"]
+[gd_scene load_steps=6 format=3 uid="uid://bgd1shp5bleyv"]
 
 [ext_resource type="Script" path="res://scenes/enemy.gd" id="1_njuq5"]
+[ext_resource type="Texture2D" uid="uid://cb01hboardyar" path="res://assets/image0.jpg" id="2_hfabs"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1k4ha"]
+albedo_texture = ExtResource("2_hfabs")
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_bhari"]
 height = 1.5
@@ -13,6 +17,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.85987, -0.62529, 0)
 script = ExtResource("1_njuq5")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_1k4ha")
 mesh = SubResource("CapsuleMesh_bhari")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
