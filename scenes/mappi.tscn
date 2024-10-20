@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://6w4uqo2jvkw2"]
 
-[ext_resource type="ArrayMesh" uid="uid://cc0sdfy3qo1e" path="res://assets/ruoho.res" id="1_1rxko"]
-[ext_resource type="ArrayMesh" uid="uid://c6ij4nnd86hx8" path="res://assets/multa.res" id="2_6qd6y"]
+[ext_resource type="ArrayMesh" uid="uid://c2blwqtgkv5sf" path="res://assets/ruoho.res" id="1_1rxko"]
+[ext_resource type="ArrayMesh" uid="uid://cr5kyfwqkey4k" path="res://assets/multa.res" id="2_6qd6y"]
 
 [sub_resource type="Gradient" id="Gradient_1j6c4"]
 colors = PackedColorArray(0, 0.453848, 0, 1, 0.236231, 0.698551, 0.233581, 1)

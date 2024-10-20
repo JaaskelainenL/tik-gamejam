@@ -19,6 +19,7 @@ var HIT_TIMER: float = 0.0
 const HIT_COOLDOWN: float = 0.5
 var PUSH_FORCE: float = 20
 var KB_USES = 0
+@export var BULLETS = 0
 
 func _process(delta: float) -> void:
 	if is_on_floor() and !doing_action and !roulette_active:
@@ -85,9 +86,14 @@ func apply_knockback_to_enemy(enemy: Node3D) -> void:
 	if enemy is CharacterBody3D:
 		var knockback_direction = (enemy.global_transform.origin - global_transform.origin).normalized()
 		enemy.velocity += knockback_direction * PUSH_FORCE  # Adjust knockback force for enemy
+		enemy.damage(10)
 		if KB_USES > 0:
+			enemy.damage(15)
 			KB_USES -= 1
-			abText.text = "KB left: " + str(KB_USES)
+			abText.text = ""
+			if BULLETS > 0:
+				abText.text += "Bullets left: " + str(BULLETS) + "\n"
+			abText.text += "KB left: " + str(KB_USES)
 			if KB_USES == 0:
 				abText.text = ""
 				PUSH_FORCE = 20
@@ -101,12 +107,14 @@ func roulette_action(action):
 		velocity.x = direction.x * JUMP_DISTANCE
 		velocity.z = direction.z * JUMP_DISTANCE
 	elif action == "shoot":
-		shoot_bullet()
-		items.erase("shoot")
+		if BULLETS <= 0:
+			items.erase("shoot")
+		else:
+			BULLETS-=1
+			shoot_bullet()
 	elif action == "knockback":
 		PUSH_FORCE = 40
 		KB_USES = 5
-		abText.text = "KB left: " + str(KB_USES)
 		items.erase("knockback")
 	elif action == "acid":
 	# Save the player's current position before jumping
@@ -130,7 +138,11 @@ func roulette_action(action):
 		
 		items.erase("acid")
 
-
+	abText.text = ""
+	if BULLETS > 0:
+		abText.text += "Bullets left: " + str(BULLETS)
+	if KB_USES > 0:
+		abText.text += "\nKB left: " + str(KB_USES)
 	$suuntaNuoli.visible = true
 	doing_action = false
 
