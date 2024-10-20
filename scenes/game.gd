@@ -1,6 +1,6 @@
 extends Node3D
 var rng = RandomNumberGenerator.new()
-const ENEMY_COUNT = 3
+const ENEMY_COUNT = 5
 var enemy = preload("res://scenes/enemy.tscn") as PackedScene
 @export var score = 0
 @onready var player = get_tree().root.get_node("Game/Pleijeri")
@@ -16,7 +16,11 @@ func _ready() -> void:
 		add_child(instance)
 		
 		# Set a random position or custom placement for each instance
-		instance.global_position = Vector3(rng.randf_range(-10.0,10.0) * player.position.x, 0.0, rng.randf_range(-10.0,10.0) * player.position.z)
+		var rand_x = rng.randf_range(-10.0,10.0)
+		var rand_z = rng.randf_range(-10.0,10.0)
+	
+		
+		instance.global_position = Vector3(rand_x + player.position.x, 0.0, rand_z + player.position.z)
 		var enemy_script = instance.get_script() as Script
 		if enemy_script and enemy_script.resource_path == "res://scenes/enemy.gd": # Adjust the path accordingly
 			instance.JUMP_TIMER = rng.randf() * 3.0
@@ -39,9 +43,9 @@ func spawn_enemy() -> void:
 
 	# Set a random position or custom placement for each instance
 	instance.global_position = Vector3(
-		rng.randf_range(-10.0, 10.0) * player.position.x,
+		rng.randf_range(-10.0, 10.0) + player.position.x,
 		0.0,
-		rng.randf_range(-10.0, 10.0) * player.position.z
+		rng.randf_range(-10.0, 10.0) + player.position.z
 	)
 
 	# Initialize enemy properties if the script is set up correctly
