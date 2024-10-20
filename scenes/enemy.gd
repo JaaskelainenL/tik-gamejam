@@ -58,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		var collider = collision.get_collider()
 		if collider.name == "killplane":
 			queue_free()
-		elif collider.name == "Bullet":
+		elif collider.name.contains("Bullet"):
 			collider.queue_free()
 			damage(50)
 		elif collider.name != "floor":

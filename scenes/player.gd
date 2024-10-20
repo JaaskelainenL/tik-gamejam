@@ -29,12 +29,12 @@ func _physics_process(delta: float) -> void:
 		if collider.name == "killplane":
 			print("you died")
 			global_position = Vector3(0.0, 0.4, 0.0)
-		elif collider.name == "CharacterBody3D":  # Assuming enemy's name is "enemy"
+		elif collider.name.contains("CharacterBody3D"):  # Assuming enemy's name is "enemy"
 			if HIT_TIMER > HIT_COOLDOWN:
 				print("hit enemy")
 				apply_knockback_to_enemy(collider)
 				HIT_TIMER = 0.0
-		elif collider.name == "Bullet":
+		elif collider.name.contains("Bullet"):
 			damage(50)
 			collider.queue_free()
 	
